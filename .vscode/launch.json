@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Ejecutar Hospital",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/logica/output/App.exe",
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+            "preLaunchTask": "Compilar Hospital"
+        }
+    ]
+}

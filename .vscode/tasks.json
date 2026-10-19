@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar Hospital",
+            "type": "process",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g3",
+                "${workspaceFolder}/logica/App.cpp",
+                "${workspaceFolder}/EDD/Cola.cpp",
+                "${workspaceFolder}/dominio/Hospital.cpp",
+                "${workspaceFolder}/EDD/NodoPaciente.cpp",
+                "${workspaceFolder}/EDD/NodoServicio.cpp",
+                "${workspaceFolder}/dominio/Paciente.cpp",
+                "${workspaceFolder}/dominio/Persona.cpp",
+                "${workspaceFolder}/logica/Sistema.cpp",
+                "${workspaceFolder}/EDD/Stack.cpp",
+                "-o",
+                "${workspaceFolder}/logica/output/App.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
