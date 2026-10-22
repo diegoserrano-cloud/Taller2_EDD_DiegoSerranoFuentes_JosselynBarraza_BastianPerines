@@ -71,10 +71,18 @@ bool Sistema::CargarArchivo(string arch){
 
         string id = partes[0];
         string nombre = partes[1];
-        int edad = stoi(partes[2]);
+        int edad;
+        try {
+            
+            edad = stoi(partes[2]);
+        } catch (const invalid_argument&) {
+            cout << "Error: edad inválida en la línea " << cantLineas << ". Paciente " << nombre << " no agregado." << endl;
+            continue; // Saltar a la siguiente línea
+        }
+
         string servicio = partes[3];
+
         
-        Paciente p(id, nombre, edad, servicio);
 
         if(hospital->buscarServicio(servicio) == nullptr){
             cout << "Error: el servicio " << servicio << " no existe. Paciente " << nombre << " no agregado." << endl;

@@ -9,7 +9,7 @@ int main() {
     Sistema* sis = new Sistema();
 
     if (!sis->CargarArchivo("pacientes.txt")) {
-        
+        cout << "Error al cargar el archivo de pacientes." << endl;
         delete sis;
         return 1;
     }

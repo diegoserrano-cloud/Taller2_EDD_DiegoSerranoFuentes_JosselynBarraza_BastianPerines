@@ -12,6 +12,11 @@
   - **GitHub:** josselynbarraza-sys
   - **Carrera:** Ing. Civil en Computación e Informática
 
+- **Nombre Completo:** Bastián Felipe Perines Flores
+  - **RUT:** 22.386.968-5
+  - **GitHub:** Thkr34
+  - **Carrera:** Ing. Civil en Computación e Informática
+
 ## Instrucciones
 
 ### Requisitos previos
