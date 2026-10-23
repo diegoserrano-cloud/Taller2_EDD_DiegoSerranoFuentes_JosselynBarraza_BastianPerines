@@ -23,12 +23,12 @@ void Sistema::mostrarPacientesAtendidos(){
 * Devuelve true si se separaron exactamente 4 partes, de lo contrario devuelve false.
 * El "\0" al final de la línea indica el final de la cadena, por lo tanto el bucle se detiene cuando se alcanza ese carácter.
 */
-bool separarLinea(const string& linea, string partes[4]) {
+bool separarLinea(const string& linea, string partes[11]) {
     const char* inicio = linea.c_str(); // Convierte la línea en un puntero a char para poder recorrerla con aritmética de punteros
     const char* cursor = inicio; // Puntero que se moverá a través de la línea
     int campoActual = 0;
 
-    while (*cursor != '\0' && campoActual < 4) {
+    while (*cursor != '\0' && campoActual < 11) {
         const char* inicioCampo = cursor; // Guardamos el inicio del campo actual
 
         while (*cursor != ';' && *cursor != '\0') { // Avanzamos el cursor hasta encontrar un ';' o el final de la línea
@@ -45,8 +45,7 @@ bool separarLinea(const string& linea, string partes[4]) {
         }
     }
 
-    return campoActual == 4;
-}
+    return campoActual == 11; }
 
 bool Sistema::CargarArchivo(string arch){
     ifstream archivo(arch);
@@ -56,11 +55,11 @@ bool Sistema::CargarArchivo(string arch){
     }
     string linea;
     int cantLineas = 0;
-    while(getline(archivo, linea)){
+    /*while(getline(archivo, linea)){
         cantLineas++;
         if(linea.empty()) continue; // Ignorar líneas vacías o en blanco
 
-        string partes[4];
+        string partes[11];
 
         bool formatoValido = separarLinea(linea, partes);
         if(!formatoValido){
@@ -93,13 +92,32 @@ bool Sistema::CargarArchivo(string arch){
             cout << "Error: el paciente con ID " << id << " ya existe en la cola de espera. Paciente " << nombre << " no agregado." << endl;
             continue; 
         }
-
+        
         pendientes->AgregarPaciente(p);
 
-    }
+    }*/
+
+    //pacientes de prueba 
+    
+    Paciente p("001", "Juan Perez", 25, 37.0, 120, 3,
+            "otro", false, false, false, 0);
+    p.setServicio("Urgencias");
+
+    Paciente p2("002", "Luis Castillo", 26, 39.0, 110, 4,
+                "otro", false, false, false, 0);
+    p2.setServicio("Urgencias");
+
+    cout << "Servicio de Juan: [" << p.getServicio() << "]" << endl;
+    cout << "Servicio de Luis: [" << p2.getServicio() << "]" << endl;
+
+    pendientes->AgregarPaciente(p);
+    pendientes->AgregarPaciente(p2);
+
+    cout << "=== PACIENTES EN ESPERA ===" << endl;
+    pendientes->mostrar();
+
     return true;
 }
-
 
 void Sistema::verDepartamento(){
     cout<<" "<< endl;

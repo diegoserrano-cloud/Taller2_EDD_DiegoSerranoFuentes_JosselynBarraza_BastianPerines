@@ -1,5 +1,7 @@
 #include "Cola.hpp"
 #include <iostream>
+#include <stdexcept> //permite manejar errores mediante excepciones (la uso en la linea 23 para que revisen)
+
 using namespace std;
 
 Cola::Cola() : primero(nullptr), ultimo(nullptr){}
@@ -17,6 +19,10 @@ void Cola::AgregarPaciente(Paciente paciente){
 
 Paciente Cola::eliminarPaciente(){
     NodoPaciente* temporal = primero;
+    if(isEmpty()){
+        throw runtime_error("La cola esta vacia");
+    }
+
     Paciente p = temporal->getPaciente();
     primero = primero->getNext();
 
