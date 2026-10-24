@@ -107,14 +107,9 @@ bool Sistema::CargarArchivo(string arch){
                 "otro", false, false, false, 0);
     p2.setServicio("Urgencias");
 
-    cout << "Servicio de Juan: [" << p.getServicio() << "]" << endl;
-    cout << "Servicio de Luis: [" << p2.getServicio() << "]" << endl;
-
+    
     pendientes->AgregarPaciente(p);
     pendientes->AgregarPaciente(p2);
-
-    cout << "=== PACIENTES EN ESPERA ===" << endl;
-    pendientes->mostrar();
 
     return true;
 }
