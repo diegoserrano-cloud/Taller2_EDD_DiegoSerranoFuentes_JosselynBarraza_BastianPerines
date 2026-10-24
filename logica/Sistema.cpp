@@ -160,12 +160,9 @@ bool Sistema::CargarArchivo(string arch){
     
     Paciente p("001", "Juan Perez", 25, 37.0, 120, 3,
             "otro", false, false, false, 0);
-    p.setServicio("Urgencias");
-
+   
     Paciente p2("002", "Luis Castillo", 26, 39.0, 110, 4,
                 "otro", false, false, false, 0);
-    p2.setServicio("Urgencias");
-
     
     pendientes->AgregarPaciente(p);
     pendientes->AgregarPaciente(p2);
@@ -283,11 +280,16 @@ void Sistema::atenderPaciente(int cantidad){
             return;
         }else{
             Paciente p = pendientes->eliminarPaciente();
+            string rutaDecision = "";
+            string servicioAsignado = arbolDecision->clasificarPaciente(&p, rutaDecision);
+
+            p.setServicio(servicioAsignado);
+
             cout<<"=== Atendiendo Pacientes ==="<<endl;
             cout<<"ID: "<< p.getId() <<endl;
             cout<<"Nombre: "<<p.getNombre() <<endl;
             cout<<"Edad: "<<p.getEdad() << endl;
-            cout<<"Servicio: "<<p.getServicio()<<endl;
+            cout << "Ruta de Decision: " << rutaDecision << endl;
             cout<<" "<<endl;
             cout<<"Paciente enviado a "<<p.getServicio()<<endl;
             cout<<" "<<endl;
@@ -302,5 +304,6 @@ Sistema::~Sistema(){
     delete pendientes;
     delete atendidos;
     delete hospital;
+    delete ArbolDecision;
 }
 
