@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Paciente.hpp"
+#include "../dominio/Paciente.hpp"
 using namespace std;
 
 enum Criterio {
@@ -27,7 +27,7 @@ class NodoDecision {
         NodoDecision(string nombreServicio);
 
         bool evaluar(Paciente* p);
-        bool esHoja();
+        bool getEsHoja();
         string getServicio();
         Criterio getCriterio();
         NodoDecision* getHijoSi();

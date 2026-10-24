@@ -37,4 +37,36 @@ bool NodoDecision::evaluar(Paciente* p) {
         default:
             return false;
     }
+
+    bool NodoDecision::getEsHoja() { 
+        return this->esHoja; 
+    }
+
+    string NodoDecision::getServicio() {
+        return this->servicio;
+    }
+
+    Criterio NodoDecision::getCriterio() {
+        return this->criterio;
+    }
+
+    NodoDecision* NodoDecision::getHijoNo() {
+        return this->hijoNo;
+    }
+
+    NodoDecision* NodoDecision::getHijoSi() {
+        return this->hijoSi;
+    }
+
+    void NodoDecision::setHijoSi(NodoDecision* si) {
+        this->hijoSi = si;
+    }
+
+    void NodoDecision::setHijoNo(NodoDecision* no) {
+        this->hijoNo = no;
+    }
+
+    NodoDecision::~NodoDecision() {
+        //la eliminacion de los nodos decision se gestiona en ArbolDecision.cpp
+    }
 }
