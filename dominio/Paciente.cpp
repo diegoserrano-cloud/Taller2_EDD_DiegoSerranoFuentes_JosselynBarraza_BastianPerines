@@ -52,13 +52,13 @@ void Paciente::mostrarInfo() const{
         textoServicio = "Sin asignar";
     }
  
-    cout << "ID: " << id << " - Nombre: " << nombre << " - Edad: " << edad
-         << " - Temperatura: " << temperatura << " - Presion Arterial: " << presionArterial
-         << " - Dolor: " << dolor << " - Tipo de Dolor: " << tipoDolor
-         << " - Trauma: " << textoTrauma
-         << " - Sintomas Neurologicos: " << textoNeurologicos
-         << " - Requiere Cirugia: " << textoCirugia
-         << " - Dias de Hospitalizacion: " << diasHospitalizacion
-         << " - Servicio: " << textoServicio
+    cout << "ID: " << id << "\n - Nombre: " << nombre << "\n - Edad: " << edad
+         << "\n - Temperatura: " << temperatura << "\n - Presion Arterial: " << presionArterial
+         << "\n - Dolor: " << dolor << "\n - Tipo de Dolor: " << tipoDolor
+         << "\n - Trauma: " << textoTrauma
+         << "\n - Sintomas Neurologicos: " << textoNeurologicos
+         << "\n - Requiere Cirugia: " << textoCirugia
+         << "\n - Dias de Hospitalizacion: " << diasHospitalizacion
+         << "\n - Servicio: " << textoServicio
          << endl;
 }

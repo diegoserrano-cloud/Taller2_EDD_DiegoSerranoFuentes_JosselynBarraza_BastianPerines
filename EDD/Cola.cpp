@@ -40,7 +40,7 @@ bool Cola::isEmpty(){
 void Cola::mostrar(){
     NodoPaciente* cursor = primero;
     while(cursor!= nullptr){
-        cout<<cursor->getPaciente().getId()<< " - " << cursor->getPaciente().getNombre() << endl;
+        cursor->getPaciente().mostrarInfo();
         cursor = cursor->getNext();
     }
 }

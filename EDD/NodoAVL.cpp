@@ -28,7 +28,7 @@ void NodoAVL::setDerecho(NodoAVL* nuevo){
     derecho = nuevo;
 }
 
-void NodoAVL::setAltura(NodoAVL* nuevaAltura){
+void NodoAVL::setAltura(int nuevaAltura){
     altura = nuevaAltura;
 }
 
