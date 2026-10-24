@@ -47,6 +47,53 @@ bool separarLinea(const string& linea, string partes[11]) {
 
     return campoActual == 11; }
 
+
+bool convertirEntero(const string& texto, int& resultado) {
+    try {
+        size_t posicion = 0; //Size_t es un tipo de dato sin signo que representa el tamaño de un objeto en bytes. Se utiliza para evitar problemas de desbordamiento y garantizar que la variable pueda almacenar cualquier tamaño posible.
+        int valor = stoi(texto, &posicion);
+        if (posicion != texto.size()) {
+            return false; // Quedaron caracteres sin convertir
+        }
+        resultado = valor;
+        return true;
+    } catch (const exception&) {
+        return false; // stoi lanza excepción si el texto no es un número o es demasiado grande
+    }
+}
+
+bool convertirDouble(const string& texto, double& resultado) {
+    try {
+        size_t posicion = 0; 
+        double valor = stod(texto, &posicion);
+        if (posicion != texto.size()) {
+            return false; // Quedaron caracteres sin convertir
+        }
+        resultado = valor;
+        return true;
+    } catch (const exception&) {
+        return false; // stod lanza excepción si el texto no es un número o es demasiado grande
+    }
+}
+
+bool convertirBool(const string& texto, bool& resultado) {
+    int numero = 0;
+    bool esNumero = convertirEntero(texto, numero);
+    if (!esNumero) {
+        return false;
+    }
+ 
+    if (numero == 0) {
+        resultado = false;
+        return true;
+    }
+    if (numero == 1) {
+        resultado = true;
+        return true;
+    }
+    return false; // Si el número no es 0 ni 1, no es un valor booleano válido
+}
+
 bool Sistema::CargarArchivo(string arch){
     ifstream archivo(arch);
     if(!archivo.is_open()){
@@ -55,7 +102,7 @@ bool Sistema::CargarArchivo(string arch){
     }
     string linea;
     int cantLineas = 0;
-    /*while(getline(archivo, linea)){
+    while(getline(archivo, linea)){
         cantLineas++;
         if(linea.empty()) continue; // Ignorar líneas vacías o en blanco
 
@@ -70,23 +117,35 @@ bool Sistema::CargarArchivo(string arch){
 
         string id = partes[0];
         string nombre = partes[1];
+        string tipoDolor = partes[6];
         int edad;
-        try {
-            
-            edad = stoi(partes[2]);
-        } catch (const invalid_argument&) {
-            cout << "Error: edad inválida en la línea " << cantLineas << ". Paciente " << nombre << " no agregado." << endl;
-            continue; // Saltar a la siguiente línea
-        }
+        double temperatura;
+        int presionArterial;
+        bool tieneAlergias;
+        bool estaHospitalizado;
+        bool necesitaObservacion;
+        int tiempoEspera;
 
-        string servicio = partes[3];
+        bool datosValidos = true;
+        if(!convertirEntero(partes[2], edad)){ datosValidos = false; }
+        if(!convertirDouble(partes[3], temperatura)){ datosValidos = false; }
+        if(!convertirEntero(partes[4], presionArterial)){ datosValidos = false; }
+        if(!convertirEntero(partes[5], dolor)){ datosValidos = false; }
+        if(!convertirBool(partes[7], trauma)){ datosValidos = false; }
+        if(!convertirBool(partes[8], sintomasNeurologicos)){ datosValidos = false; }
+        if(!convertirBool(partes[9], requiereCirugia)){ datosValidos = false; }
+        if(!convertirEntero(partes[10], diasHospitalizacion)){ datosValidos = false; }
 
-        
-
-        if(hospital->buscarServicio(servicio) == nullptr){
-            cout << "Error: el servicio " << servicio << " no existe. Paciente " << nombre << " no agregado." << endl;
+        if(!datosValidos){
+            cout << "Error: datos inválidos en la línea " << cantLineas << ". Paciente no agregado." << endl;
             continue; 
         }
+
+        //Dado que el servicio no se encuentra en el archivo, se otorgara uno en el arbol AVL, segun el tipo de dolor y la gravedad del paciente.
+        Paciente p(id, nombre, edad, temperatura, presionArterial,
+                   dolor, tipoDolor, trauma, sintomasNeurologicos,
+                   requiereCirugia, diasHospitalizacion);
+       
 
         if(pendientes->existeId(id)){
             cout << "Error: el paciente con ID " << id << " ya existe en la cola de espera. Paciente " << nombre << " no agregado." << endl;
@@ -95,7 +154,7 @@ bool Sistema::CargarArchivo(string arch){
         
         pendientes->AgregarPaciente(p);
 
-    }*/
+    }
 
     //pacientes de prueba 
     
