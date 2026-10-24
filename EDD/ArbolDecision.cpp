@@ -99,16 +99,19 @@ void ArbolDecision::postordenRecursivo(NodoDecision* nodo) {
 }
 
 void ArbolDecision::mostrarPreorden() {
+    cout << "mostrando el Arbol de Decision en Preorden. " << endl;
     preordenRecursivo(this->raiz);
     cout << endl;
 }
 
 void ArbolDecision::mostrarInorden() {
+    cout << "mostrando el Arbol de Decision en Inorden. " << endl;
     inordenRecursivo(this->raiz);
     cout << endl;
 }
 
 void ArbolDecision::mostrarPostorden() {
+    cout << "mostrando el Arbol de Decision en Postorden. " << endl;
     postordenRecursivo(this->raiz);
     cout << endl;
 }
