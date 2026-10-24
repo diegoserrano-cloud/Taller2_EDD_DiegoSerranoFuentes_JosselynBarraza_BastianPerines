@@ -1,5 +1,5 @@
 #pragma once
-#include "NodoAVL"
+#include "NodoAVL.hpp"
 
 class AVL{
     private:
