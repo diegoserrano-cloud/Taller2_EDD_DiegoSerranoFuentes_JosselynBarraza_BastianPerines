@@ -38,6 +38,33 @@ int AVL::factorBalance(NodoAVL* nodo){
 
     return izquierda - derecha;
 }
+
+NodoAVL* AVL::insertar(NodoAVL* nodo, Paciente paciente){ //busca donde colocar el paciente de forma recursiva.
+    if(nodo == nullptr){
+        return new NodoAVL(paciente);
+    }
+
+    if(paciente.getId() < nodo->getPaciente().getId()){
+        nodo->setIzquierdo(insertar(nodo->getIzquierdo(), paciente));
+    }
+
+    else if(paciente.getId() > nodo->getPaciente().getId()){
+        nodo->setDerecho(insertar(nodo->getDerecho(), paciente));
+    }
+
+    else{
+        return nodo;
+    }
+
+    actualizarAltura(nodo);
+
+    return nodo;
+}
+
+void AVL::insertarPaciente(Paciente paciente){
+    raiz = insertar(raiz, paciente);
+}
+
 AVL::~AVL(){
     
 }
