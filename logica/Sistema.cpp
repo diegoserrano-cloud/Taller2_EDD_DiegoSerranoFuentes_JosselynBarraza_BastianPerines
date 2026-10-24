@@ -298,6 +298,9 @@ void Sistema::atenderPaciente(int cantidad){
             atendidos->push(p);
         }
     }
+    ArbolDecision->mostrarPreorden();
+    ArbolDecision->mostrarInorden();
+    ArbolDecision->mostrarPostorden();
 }
 
 

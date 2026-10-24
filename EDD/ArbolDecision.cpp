@@ -70,8 +70,46 @@ void ArbolDecision::preordenRecursivo(NodoDecision* nodo) {
     preordenRecursivo(nodo->getHijoNo());
 }
 
+void ArbolDecision::inordenRecursivo(NodoDecision* nodo) {
+    if (nodo == nullptr) return;
+
+    inordenRecursivo(nodo->getHijoSi());
+
+    if (nodo->getEsHoja()) {
+        cout << "[hoja: " << nodo->getServicio() << "] ";
+    } else {
+        cout << "[Nodo Decision] ";
+    }
+
+    
+    inordenRecursivo(nodo->getHijoNo());
+}
+
+void ArbolDecision::postordenRecursivo(NodoDecision* nodo) {
+    if (nodo == nullptr) return;
+
+    postordenRecursivo(nodo->getHijoSi());
+    postordenRecursivo(nodo->getHijoNo());
+
+    if (nodo->getEsHoja()) {
+        cout << "[hoja: " << nodo->getServicio() << "] ";
+    } else {
+        cout << "[Nodo Decision] ";
+    }
+}
+
 void ArbolDecision::mostrarPreorden() {
     preordenRecursivo(this->raiz);
+    cout << endl;
+}
+
+void ArbolDecision::mostrarInorden() {
+    inordenRecursivo(this->raiz);
+    cout << endl;
+}
+
+void ArbolDecision::mostrarPostorden() {
+    postordenRecursivo(this->raiz);
     cout << endl;
 }
 
