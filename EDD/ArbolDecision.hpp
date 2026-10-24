@@ -3,10 +3,10 @@
 
 class ArbolDecision {
     private:
-        NodoDesicion* raiz;
+        NodoDecision* raiz;
 
         void construirArbol();
-        string clasificarRecursivo(NodoDesicion* nodo, Paciente* p, string& ruta);
+        string clasificarRecursivo(NodoDecision* nodo, Paciente* p, string& ruta);
         void preordenRecursivo(NodoDecision* nodo);
         void destruirRecursivo(NodoDecision* nodo);
 

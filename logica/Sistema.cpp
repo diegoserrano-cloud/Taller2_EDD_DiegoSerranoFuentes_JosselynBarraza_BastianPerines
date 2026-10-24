@@ -121,10 +121,11 @@ bool Sistema::CargarArchivo(string arch){
         int edad;
         double temperatura;
         int presionArterial;
-        bool tieneAlergias;
-        bool estaHospitalizado;
-        bool necesitaObservacion;
-        int tiempoEspera;
+        int dolor;
+        bool trauma;
+        bool sintomasNeurologicos;
+        bool requiereCirugia;
+        int diasHospitalizacion;
 
         bool datosValidos = true;
         if(!convertirEntero(partes[2], edad)){ datosValidos = false; }
@@ -304,6 +305,6 @@ Sistema::~Sistema(){
     delete pendientes;
     delete atendidos;
     delete hospital;
-    delete ArbolDecision;
+    delete arbolDecision;
 }
 

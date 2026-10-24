@@ -10,7 +10,7 @@ class Sistema{
         Cola* pendientes = new Cola();
         Stack* atendidos = new Stack();
         Hospital* hospital = new Hospital();
-        ArbolDecision* arbol = new ArbolDecision();
+        ArbolDecision* arbolDecision = new ArbolDecision();
     public:
          void mostrarPacientesEspera();
          bool CargarArchivo(string arch);

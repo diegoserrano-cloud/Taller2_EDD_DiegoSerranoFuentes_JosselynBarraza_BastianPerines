@@ -18,9 +18,9 @@ void ArbolDecision::construirArbol() {
     nCirugia->setHijoSi(new NodoDecision("Cirugia"));
     nCirugia->setHijoNo(new NodoDecision("Traumatologia"));
 
-    NodoDesicion* nNeuro = new NodoDecision(SINTOMAS_NEUROLOGICOS);
+    NodoDecision* nNeuro = new NodoDecision(SINTOMAS_NEUROLOGICOS);
     nTrauma->setHijoNo(nNeuro);
-    nNeuro->sethijoSi(new NodoDecision("Neurologia"));
+    nNeuro->setHijoSi(new NodoDecision("Neurologia"));
 
     NodoDecision* nPecho = new NodoDecision(TIPO_DOLOR_PECHO);
     nNeuro->setHijoNo(nPecho);
@@ -36,7 +36,7 @@ void ArbolDecision::construirArbol() {
     nHosp->setHijoNo(new NodoDecision("Medicina General"));
 }
 
-string ArbolDesicion::ClasificarRecursivo(NodoDecision* nodo, Paciente* p, string& ruta) {
+string ArbolDecision::clasificarRecursivo(NodoDecision* nodo, Paciente* p, string& ruta) {
     if (nodo == nullptr) return "Medicina General"; 
 
     if (nodo->getEsHoja()) {
@@ -52,12 +52,12 @@ string ArbolDesicion::ClasificarRecursivo(NodoDecision* nodo, Paciente* p, strin
     }
 }
 
-string ArbolDesicion::clasificarPaciente(Paciente* p, string& rutaDetallada) {
+string ArbolDecision::clasificarPaciente(Paciente* p, string& rutaDetallada) {
     rutaDetallada = "Raiz(inicio)";
     return clasificarRecursivo(this->raiz, p, rutaDetallada);
 }
 
-void ArbolDesicion::preordenRecursivo(NodoDecision* nodo) {
+void ArbolDecision::preordenRecursivo(NodoDecision* nodo) {
     if (nodo == nullptr) return;
 
     if (nodo->getEsHoja()) {
@@ -66,8 +66,8 @@ void ArbolDesicion::preordenRecursivo(NodoDecision* nodo) {
         cout << "[Nodo Decision] ";
     }
 
-    preordenRecursivo(Nodo->getHijoSi());
-    preordenRecursivo(Nodo->getHijoNo());
+    preordenRecursivo(nodo->getHijoSi());
+    preordenRecursivo(nodo->getHijoNo());
 }
 
 void ArbolDecision::mostrarPreorden() {

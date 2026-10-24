@@ -37,6 +37,7 @@ bool NodoDecision::evaluar(Paciente* p) {
         default:
             return false;
     }
+}
 
     bool NodoDecision::getEsHoja() { 
         return this->esHoja; 
@@ -69,4 +70,4 @@ bool NodoDecision::evaluar(Paciente* p) {
     NodoDecision::~NodoDecision() {
         //la eliminacion de los nodos decision se gestiona en ArbolDecision.cpp
     }
-}
+
