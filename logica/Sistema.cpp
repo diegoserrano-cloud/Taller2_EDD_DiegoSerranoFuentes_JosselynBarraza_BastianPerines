@@ -293,18 +293,43 @@ void Sistema::atenderPaciente(int cantidad){
 }
 
 void Sistema::buscaPaciente(){
-    string id;
+    int opcion;
 
-    cout<<"Ingrese el Id del paciente a buscar: ";
-    cin>> id;
+    cout << "=== BUSCAR PACIENTE ===" << endl;
+    cout << "1. Buscar por ID" << endl;
+    cout << "2. Buscar por nombre" << endl;
+    cout << "Seleccione una opcion: ";
+    cin >> opcion;
 
-    Paciente* encontrado = hospital->buscarPaciente(id);
+    if(opcion == 1){
+        string id;
 
-    if(encontrado != nullptr){
-        cout << "=== PACIENTE ENCONTRADO ==="<< endl;
-        encontrado->mostrarInfo();
-    }else{
-        cout<< "No se encontro un paciente con ID: " << id<<endl;
+        cout << "Ingrese el ID del paciente: ";
+        cin >> id;
+
+        Paciente* encontrado = hospital->buscarPaciente(id);
+
+        if(encontrado != nullptr){
+            cout << "=== PACIENTE ENCONTRADO ===" << endl;
+            encontrado->mostrarInfo();
+        }else{
+            cout << "No se encontro un paciente con ID: " << id << endl;
+        }
+    }
+    else if(opcion == 2){
+        string nombre;
+
+        cout << "Ingrese el nombre completo del paciente: ";
+        getline(cin >> ws, nombre); //lee nombre con espacios "Juan Perez"
+
+        int encontrados = hospital->buscarPacientesPorNombre(nombre);
+
+        if(encontrados == 0){
+            cout << "No se encontraron pacientes con nombre: " << nombre << endl;
+        }
+    }
+    else{
+        cout << "Opcion invalida." << endl;
     }
 }
 

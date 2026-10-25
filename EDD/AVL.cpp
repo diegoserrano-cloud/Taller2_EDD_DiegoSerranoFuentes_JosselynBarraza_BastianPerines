@@ -229,6 +229,29 @@ void AVL::destruirRecursivo(NodoAVL* nodo) {
     delete nodo;
 }
 
+void AVL::buscarPorNombre(NodoAVL* nodo, const string& nombre, int& encontrados){
+    if(nodo == nullptr){
+        return;
+    }
+
+    buscarPorNombre(nodo->getIzquierdo(), nombre, encontrados);
+
+    if(nodo->getPaciente().getNombre() == nombre){
+        nodo->getPaciente().mostrarInfo();
+        encontrados++;
+    }
+
+    buscarPorNombre(nodo->getDerecho(), nombre, encontrados);
+}
+
+int AVL::buscarPacientesPorNombre(const string& nombre){
+    int encontrados = 0;
+
+    buscarPorNombre(raiz, nombre, encontrados);
+
+    return encontrados;
+}
+
 AVL::~AVL(){
     destruirRecursivo(this->raiz);
     raiz = nullptr;

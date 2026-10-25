@@ -22,6 +22,7 @@ class AVL{
         void postorden(NodoAVL* nodo);
         void destruirRecursivo(NodoAVL* nodo);
         int contarNodos(const NodoAVL* nodo) const;
+        void buscarPorNombre(NodoAVL* nodo, const string& nombre, int& encontrados);
     
     public:
         AVL();
@@ -39,6 +40,7 @@ class AVL{
         int getAlturaRuta() const;
         int getFactorBalanceRaiz() const;
         int contarPacientes() const;
+        int buscarPacientesPorNombre(const string& nombre);
 
         ~AVL();
 };

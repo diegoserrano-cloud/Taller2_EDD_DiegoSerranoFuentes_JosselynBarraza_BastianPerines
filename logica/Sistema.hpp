@@ -21,4 +21,3 @@ class Sistema{
          void buscaPaciente();
          
         ~Sistema();
-};
