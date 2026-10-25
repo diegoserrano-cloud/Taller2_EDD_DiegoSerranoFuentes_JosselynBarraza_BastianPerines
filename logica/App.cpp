@@ -19,8 +19,8 @@ int main() {
     
       cout<<"=== HOSPITAL MARMAJA =="<<endl;
       cout<<"1. Atender pacientes"<<endl;
-      cout<<"2. Ver departamento"<<endl;
-      cout<<"3. Revisar historial de atención"<<endl;
+      cout<<"2. Ver departamentos"<<endl;
+      cout<<"3. Buscar paciente"<<endl;
       cout<<"4. Salir"<<endl;
       cout<<" "<<endl;
       cout<<"Seleccionar opción (debe estar entre 1 y 4): ";
@@ -52,7 +52,7 @@ int main() {
                 sis->verDepartamento();  
                 break;
             case 3:
-                sis->revisarHistorial();
+                sis->buscaPaciente();
                 break;
             case 4:
                 cout<<"Saliendo....."<<endl;

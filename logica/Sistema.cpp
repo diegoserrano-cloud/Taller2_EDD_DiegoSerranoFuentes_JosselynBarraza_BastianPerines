@@ -157,17 +157,6 @@ bool Sistema::CargarArchivo(string arch){
 
     }
 
-    //pacientes de prueba 
-    
-    Paciente p("001", "Juan Perez", 25, 37.0, 120, 3,
-            "otro", false, false, false, 0);
-   
-    Paciente p2("002", "Luis Castillo", 26, 39.0, 110, 4,
-                "otro", false, false, false, 0);
-    
-    pendientes->AgregarPaciente(p);
-    pendientes->AgregarPaciente(p2);
-
     return true;
 }
 
@@ -303,6 +292,21 @@ void Sistema::atenderPaciente(int cantidad){
     arbolDecision->mostrarPostorden();
 }
 
+void Sistema::buscaPaciente(){
+    string id;
+
+    cout<<"Ingrese el Id del paciente a buscar: ";
+    cin>> id;
+
+    Paciente* encontrado = hospital->buscarPaciente(id);
+
+    if(encontrado != nullptr){
+        cout << "=== PACIENTE ENCONTRADO ==="<< endl;
+        encontrado->mostrarInfo();
+    }else{
+        cout<< "No se encontro un paciente con ID: " << id<<endl;
+    }
+}
 
 Sistema::~Sistema(){
     delete pendientes;

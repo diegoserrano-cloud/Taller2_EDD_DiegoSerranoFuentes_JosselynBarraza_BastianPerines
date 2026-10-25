@@ -75,6 +75,23 @@ int Hospital::contarPacientes(string nombre){
     return 0;
 }
 
+Paciente* Hospital::buscarPaciente(string id){
+    NodoServicio* cursor = primerServicio;
+
+    while(cursor!= nullptr){
+        Paciente* encontrado = cursor->getArbolPacientes().buscarPaciente(id);
+
+        if(encontrado != nullptr){
+            return encontrado;
+        }
+
+        cursor = cursor->getNextServicio();
+
+    }
+
+    return nullptr;
+}
+
 Hospital::~Hospital() {
     NodoServicio* cursor = primerServicio;
 

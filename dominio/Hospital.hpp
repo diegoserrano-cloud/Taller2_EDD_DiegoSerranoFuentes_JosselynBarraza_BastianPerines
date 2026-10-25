@@ -22,6 +22,8 @@ class Hospital {
 
         int contarPacientes(string nombre);
 
+        Paciente* buscarPaciente(string id);
+
         ~Hospital();
 
 };

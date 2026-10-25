@@ -18,6 +18,7 @@ class Sistema{
          void revisarHistorial();
          void verDepartamento();
          void atenderPaciente(int cantidad);
+         void buscaPaciente();
          
         ~Sistema();
 };
