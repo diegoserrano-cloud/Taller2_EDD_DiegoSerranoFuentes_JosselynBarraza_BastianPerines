@@ -265,17 +265,23 @@ void Sistema::eliminarPacientePorId(){
     string id;
     cout << "Ingrese el ID del paciente que desea buscar: ";
     cin >> id;
-    Paciente* paciente = hospital->buscarPaciente(id);
+    string rutaBusqueda = "";
+    Paciente* paciente = hospital->buscarPacienteConRuta(id, rutaBusqueda);
     if(paciente != nullptr){
 
         paciente->mostrarInfo();
+        if (rutaBusqueda.empty()) {
+            cout << "Ruta de busqueda: Raiz (0 giros)" << endl;
+        } else {
+            cout << "Ruta de busqueda: " << rutaBusqueda << endl;
+        }
         bool eliminado = hospital->eliminarPaciente(id);
         if(eliminado){
             cout << "Paciente con ID " << id << " eliminado exitosamente." << endl;
-        }
         }else{
             cout << "No se encontro un paciente con ID: " << id << endl;
         }
+    }
 }
 
 Sistema::~Sistema(){

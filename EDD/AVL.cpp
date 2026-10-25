@@ -314,6 +314,34 @@ int AVL::buscarPacientesPorNombre(const string& nombre){
     return encontrados;
 }
 
+NodoAVL* AVL::buscarPorIdConRuta(NodoAVL* nodo, const string& id, string& ruta) {
+    if (nodo == nullptr) {
+        return nullptr;
+    }
+
+    if (nodo->getPaciente().getId() == id) {
+        return nodo;
+    }
+
+    if (id < nodo.getPaciente().getId() ) {
+        ruta += "0";
+        return buscarPorIdConRuta(nodo->getIzquierdo(), id, ruta);
+    } else {
+        ruta += "1";
+        return buscarPorIdConRuta(nodo->getDerecho(), id, ruta);
+    }
+}
+
+Paciente* AVL::buscarPacienteConRuta(const string& id, string& ruta) {
+    ruta = "";
+    NodoAVL* resultado = buscarPorIdConRuta(this->raiz, id, ruta);
+
+    if (resultado != nullptr) {
+        return &(resultado->getPaciente());
+    }
+    return nullptr;
+}
+
 AVL::~AVL(){
     destruirRecursivo(this->raiz);
     raiz = nullptr;
