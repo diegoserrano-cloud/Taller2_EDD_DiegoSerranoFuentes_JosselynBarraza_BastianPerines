@@ -280,12 +280,14 @@ void Sistema::eliminarPacientePorId(){
     Paciente* paciente = hospital->buscarPaciente(id);
     if(paciente != nullptr){
 
-        cout << paciente->mostrarInfo() << endl;
+        paciente->mostrarInfo();
         bool eliminado = hospital->eliminarPaciente(id);
-
-    }else{
-        cout << "No se encontro un paciente con ID: " << id << endl;
-    }
+        if(eliminado){
+            cout << "Paciente con ID " << id << " eliminado exitosamente." << endl;
+        }
+        }else{
+            cout << "No se encontro un paciente con ID: " << id << endl;
+        }
 }
 
 Sistema::~Sistema(){

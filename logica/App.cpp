@@ -23,14 +23,14 @@ int main() {
       cout<<"3. Buscar paciente"<<endl;
       cout<<"4. Salir"<<endl;
       cout<<" "<<endl;
-      cout<<"Seleccionar opción (debe estar entre 1 y 5): ";
+      cout<<"Seleccionar opción (debe estar entre 1 y 4): ";
       cin>>opcion;
       try{
        
         if(cin.fail()){
             cin.clear();
             cin.ignore(1000, '\n');
-            cout<<"ERROR: Ingrese un número entre 1 y 5"<<endl;
+            cout<<"ERROR: Ingrese un número entre 1 y 4"<<endl;
             throw opcion;
         }   
 
@@ -59,12 +59,12 @@ int main() {
                 break;
         }
 
-      }catch(int e){
-        cout<<"ERROR: "<< e << " invalido" << endl;
-        opcion= 0;
-      }
+        }catch(int e){
+            cout<<"ERROR: "<< e << " invalido" << endl;
+            opcion= 0;
+        }
 
-    }while(opcion != 5);
+    } while(opcion != 4);
     delete sis;
     return 0;
 
