@@ -16,7 +16,23 @@
   - **RUT:** 22.386.968-5
   - **GitHub:** Thkr34
   - **Carrera:** Ing. Civil en Computación e Informática
+  - 
+### 🌲 Árbol de Decisión (Clasificación Automática de Pacientes)
 
+El sistema utiliza un Árbol de Decisión Binario jerárquico para clasificar
+automáticamente a cada paciente en uno de los 8 servicios médicos del
+hospital evaluando sus signos vitales y síntomas de manera secuencial:
+
+1. Pediatría: Evalúa si la edad del paciente es menor a 14 años (Edad < 14).
+2. Cirugía / Traumatología: Si presenta un trauma (Trauma == true), se verifica si requiere intervención quirúrgica (RequiereCirugia == true) para derivar a Cirugía; de lo contrario, se asigna a Traumatología.
+3. Neurología: Detecta la presencia de síntomas neurológicos (SintomasNeurologicos == true).
+4. Cardiología: Identifica si el cuadro clínico corresponde a un dolor de pecho (TipoDolor == "pecho").
+5. Urgencias: Evalúa criterios de gravedad o urgencia crítica (Temperatura >= 38.5 o Dolor >= 8).
+6. Hospitalización / Medicina General: Analiza la duración de la estancia prevista (DiasHospitalizacion >= 2) para derivar a Hospitalización; si no cumple ninguna condición anterior, el paciente es asignado a Medicina General.
+
+Nota: Cada evaluación en el árbol imprime en consola la ruta recorrida (ej. Raiz(inicio) -> NO -> SI...) garantizando la trazabilidad de la decisión médica. Tambien esta la imagen ArbolDecisiones.PNG que es una recreacion visual del mismo árbol de decisiones hecha en draw.io
+
+ 
 ## Instrucciones
 
 ### Requisitos previos
