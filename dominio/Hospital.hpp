@@ -10,6 +10,8 @@ class Hospital {
     public:
         Hospital(); //Crea los 8 servicios 
 
+        Paciente* buscarPacienteConRuta(string id, string& ruta);
+
         NodoServicio* buscarServicio(string nombre) const; //recorre la lista y devuelve el servicio con ese nombre
 
         void derivarPaciente(Paciente p);//Segun el servicio se inserta el paciente en su lista interna

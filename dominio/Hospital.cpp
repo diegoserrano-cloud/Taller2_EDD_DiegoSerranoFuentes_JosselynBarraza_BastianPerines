@@ -92,6 +92,22 @@ Paciente* Hospital::buscarPaciente(string id){
     return nullptr;
 }
 
+Paciente* Hospital::buscarPacienteConRuta(string id, string& ruta) {
+    NodoServicio* cursor = primerServicio;
+
+    while(cursor!=nullptr) {
+        ruta = "";
+        Paciente* encontrado = cursor->getArbolPacientes().buscarPacienteConRuta(id,ruta);
+        if (encontrado != nullptr) {
+            return encontrado;
+        }
+
+        cursor->getNextServicio();
+    }
+    ruta = "";
+    return nullptr;
+}
+
 bool Hospital::eliminarPaciente(string id){
     NodoServicio* cursor = primerServicio;
     while(cursor != nullptr){

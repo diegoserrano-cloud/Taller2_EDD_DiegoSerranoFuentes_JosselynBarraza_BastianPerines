@@ -323,7 +323,7 @@ NodoAVL* AVL::buscarPorIdConRuta(NodoAVL* nodo, const string& id, string& ruta) 
         return nodo;
     }
 
-    if (id < nodo.getPaciente().getId() ) {
+    if (id < nodo.->getPaciente().getId() ) {
         ruta += "0";
         return buscarPorIdConRuta(nodo->getIzquierdo(), id, ruta);
     } else {
