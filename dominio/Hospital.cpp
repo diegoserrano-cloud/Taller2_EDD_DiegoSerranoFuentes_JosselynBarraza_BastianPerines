@@ -102,7 +102,7 @@ Paciente* Hospital::buscarPacienteConRuta(string id, string& ruta) {
             return encontrado;
         }
 
-        cursor->getNextServicio();
+        cursor = cursor->getNextServicio();
     }
     ruta = "";
     return nullptr;

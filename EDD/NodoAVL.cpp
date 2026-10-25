@@ -5,11 +5,11 @@ NodoAVL::NodoAVL(Paciente p) :
     derecho(nullptr), altura(1) {}
 
 Paciente& NodoAVL::getPaciente(){
-    return paciente;
+    return this->paciente;
 }
 
 const Paciente& NodoAVL::getPaciente() const{
-    return paciente;
+    return this->paciente;
 }
 
 NodoAVL* NodoAVL::getIzquierdo() const{

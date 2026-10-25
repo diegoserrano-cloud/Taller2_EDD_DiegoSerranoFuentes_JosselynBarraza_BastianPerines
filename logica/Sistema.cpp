@@ -281,6 +281,8 @@ void Sistema::eliminarPacientePorId(){
         }else{
             cout << "No se encontro un paciente con ID: " << id << endl;
         }
+    } else {
+        cout << "No se encontro un paciente con ID: " << id << endl;
     }
 }
 
