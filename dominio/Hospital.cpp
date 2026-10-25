@@ -37,19 +37,7 @@ void Hospital::derivarPaciente(Paciente p) {
     string servicio = p.getServicio();
     NodoServicio* nodoServicio = buscarServicio(servicio);
     if(nodoServicio != nullptr){
-        NodoPaciente* nuevo = new NodoPaciente(p);
-        
-        NodoPaciente* primeroDelServicio = nodoServicio->getPacienteLista();
-
-        if (primeroDelServicio == nullptr) {
-            nodoServicio->setPrimerPaciente(nuevo);
-        } else {
-            NodoPaciente* cursor = primeroDelServicio;
-            while (cursor->getNext() != nullptr) {
-                cursor = cursor->getNext();
-            }
-            cursor->setNext(nuevo);
-        }
+        nodoServicio->getArbolPacientes().insertarPaciente(p);
     }else{
         cout << "No se encontro el servicio indicado: " << servicio << endl;
     }
@@ -64,12 +52,7 @@ void Hospital::mostrarEstado(){
     NodoServicio* cursor = primerServicio;
     while(cursor!=nullptr){
         cout<<cursor->getServicio()<< ": " << endl;
-        NodoPaciente* paciente = cursor->getPacienteLista();
- 
-        while(paciente!=nullptr){
-            cout<<"- "<<paciente->getPaciente().getNombre()<<endl;
-            paciente = paciente->getNext();
-        }
+        cursor->getArbolPacientes().mostrarInorden();
         cursor = cursor->getNextServicio();
     }
 }
@@ -78,11 +61,7 @@ void Hospital::mostrarServicio(string nombre) {
     NodoServicio* nodoServicio = buscarServicio(nombre);
     if (nodoServicio != nullptr) {
         cout << "Pacientes en el servicio " << nombre << ":" << endl;
-        NodoPaciente* paciente = nodoServicio->getPacienteLista();
-        while (paciente != nullptr) {
-            cout <<paciente->getPaciente().getNombre() << " ("<<paciente->getPaciente().getEdad()<<")"<<endl;
-            paciente = paciente->getNext();
-        }
+        nodoServicio->getArbolPacientes().mostrarInorden();
     } else {
         cout << "No existe el servicio: " << nombre << endl;
     }
@@ -90,28 +69,17 @@ void Hospital::mostrarServicio(string nombre) {
 
 int Hospital::contarPacientes(string nombre){
     NodoServicio* nodoServicio = buscarServicio(nombre);
-    int cant = 0;
     if (nodoServicio != nullptr) {
-        NodoPaciente* paciente = nodoServicio->getPacienteLista();
-        while (paciente != nullptr) {
-            cant++;
-            paciente = paciente->getNext();
-        }
-    }return cant;
+        return nodoServicio->getArbolPacientes().contarPacientes();
+    }
+    return 0;
 }
 
 Hospital::~Hospital() {
     NodoServicio* cursor = primerServicio;
 
     while(cursor != nullptr) {
-        NodoPaciente* paciente = cursor->getPacienteLista();
         NodoServicio* temporal = cursor;
-
-        while(paciente != nullptr) {
-            NodoPaciente* temp = paciente;
-            paciente = paciente->getNext();
-            delete temp;
-        }
         cursor = cursor->getNextServicio();
         delete temporal;
     }

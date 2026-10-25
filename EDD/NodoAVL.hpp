@@ -10,7 +10,8 @@ class NodoAVL{
     public:
         NodoAVL(Paciente p);
 
-        Paciente getPaciente() const;
+        Paciente& getPaciente();
+        const Paciente& getPaciente() const;
         NodoAVL* getIzquierdo() const;
         NodoAVL* getDerecho() const;
         int getAltura() const;

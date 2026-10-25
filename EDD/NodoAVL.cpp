@@ -4,7 +4,11 @@ NodoAVL::NodoAVL(Paciente p) :
     paciente(p), izquierdo(nullptr), 
     derecho(nullptr), altura(1) {}
 
-Paciente NodoAVL::getPaciente() const{
+Paciente& NodoAVL::getPaciente(){
+    return paciente;
+}
+
+const Paciente& NodoAVL::getPaciente() const{
     return paciente;
 }
 
@@ -31,4 +35,3 @@ void NodoAVL::setDerecho(NodoAVL* nuevo){
 void NodoAVL::setAltura(int nuevaAltura){
     altura = nuevaAltura;
 }
-

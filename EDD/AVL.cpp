@@ -4,7 +4,7 @@ AVL::AVL(){
     raiz = nullptr;
 }
 
-int AVL::obtenerAltura(NodoAVL* nodo){
+int AVL::obtenerAltura(const NodoAVL* nodo) const{
     if(nodo == nullptr){
         return 0;
     }
@@ -28,7 +28,7 @@ void AVL::actualizarAltura(NodoAVL* nodo){
     }
 }
 
-int AVL::factorBalance(NodoAVL* nodo){
+int AVL::factorBalance(const NodoAVL* nodo) const{
     if(nodo==nullptr){
         return 0;
     }
@@ -44,7 +44,7 @@ NodoAVL* AVL::rotarDerecha(NodoAVL* y) {
     NodoAVL* t2 = x->getDerecho();
 
     x->setDerecho(y);
-    y-> setIzquierdo(T2);
+    y->setIzquierdo(t2);
 
     actualizarAltura(y);
     actualizarAltura(x);
@@ -53,11 +53,11 @@ NodoAVL* AVL::rotarDerecha(NodoAVL* y) {
 }
 
 NodoAVL* AVL::rotarIzquierda(NodoAVL* x) {
-    NodoAVL* y = x->getIzquierdo();
-    NodoAVL* t2 = y->getDerecho();
+    NodoAVL* y = x->getDerecho();
+    NodoAVL* t2 = y->getIzquierdo();
 
-    y->setDerecho(x);
-    x-> setIzquierdo(T2);
+    y->setIzquierdo(x);
+    x->setDerecho(t2);
 
     actualizarAltura(x);
     actualizarAltura(y);
@@ -87,20 +87,20 @@ NodoAVL* AVL::insertar(NodoAVL* nodo, Paciente paciente){ //busca donde colocar 
 
     int balance = factorBalance(nodo);
 
-    if (balance > 1 && paciente.getId() < nodo->getIzquierdo()->getPaciente()->getId()) {
+    if (balance > 1 && paciente.getId() < nodo->getIzquierdo()->getPaciente().getId()) {
         return rotarDerecha(nodo);
     }
 
-    if (balance < -1 && paciente.getId() > nodo->getIzquierdo()->getPaciente()->getId()) {
+    if (balance < -1 && paciente.getId() > nodo->getDerecho()->getPaciente().getId()) {
         return rotarIzquierda(nodo);
     }
 
-    if (balance > 1 && paciente.getId() > nodo->getIzquierdo()->getPaciente()->getId()) {
+    if (balance > 1 && paciente.getId() > nodo->getIzquierdo()->getPaciente().getId()) {
         nodo->setIzquierdo(rotarIzquierda(nodo->getIzquierdo()));
         return rotarDerecha(nodo);
     }
 
-    if (balance < -1 && paciente.getId() < nodo->getIzquierdo()->getPaciente()->getId()) {
+    if (balance < -1 && paciente.getId() < nodo->getDerecho()->getPaciente().getId()) {
         nodo->setDerecho(rotarDerecha(nodo->getDerecho()));
         return rotarIzquierda(nodo);
     }
@@ -112,7 +112,7 @@ void AVL::insertarPaciente(Paciente paciente){
     this->raiz = insertar(raiz, paciente);
 }
 
-NodoAVL* AVL::buscarPorId(NodoAVL* nodo, string id) {
+NodoAVL* AVL::buscarPorId(NodoAVL* nodo, const string& id) {
     if (nodo == nullptr || nodo->getPaciente().getId() == id) {
         return nodo;
     }
@@ -124,8 +124,27 @@ NodoAVL* AVL::buscarPorId(NodoAVL* nodo, string id) {
     }
 }
 
-Paciente* AVL::buscarPaciente(string id) {
+const NodoAVL* AVL::buscarPorId(const NodoAVL* nodo, const string& id) const {
+    if (nodo == nullptr || nodo->getPaciente().getId() == id) {
+        return nodo;
+    }
+
+    if (id < nodo->getPaciente().getId()) {
+        return buscarPorId(nodo->getIzquierdo(), id);
+    }
+    return buscarPorId(nodo->getDerecho(), id);
+}
+
+Paciente* AVL::buscarPaciente(const string& id) {
     NodoAVL* resultado = buscarPorId(this->raiz,id);
+    if (resultado != nullptr) {
+        return &(resultado->getPaciente());
+    }
+    return nullptr;
+}
+
+const Paciente* AVL::buscarPaciente(const string& id) const {
+    const NodoAVL* resultado = buscarPorId(this->raiz, id);
     if (resultado != nullptr) {
         return &(resultado->getPaciente());
     }
@@ -165,7 +184,7 @@ void AVL::mostrarPreorden() {
         return;
     }
 
-    preoorden(this->raiz);
+    preorden(this->raiz);
 }
 
 void AVL::mostrarInorden() {
@@ -186,12 +205,21 @@ void AVL::mostrarPostorden() {
     postorden(this->raiz);
 }
 
-int AVL::getAltura() {
+int AVL::getAlturaRuta() const {
     return obtenerAltura(this->raiz);
 }
 
-int AVL::getFactorBalanceRaiz() {
+int AVL::getFactorBalanceRaiz() const {
     return factorBalance(this->raiz);
+}
+
+int AVL::contarNodos(const NodoAVL* nodo) const {
+    if (nodo == nullptr) return 0;
+    return 1 + contarNodos(nodo->getIzquierdo()) + contarNodos(nodo->getDerecho());
+}
+
+int AVL::contarPacientes() const {
+    return contarNodos(raiz);
 }
 
 void AVL::destruirRecursivo(NodoAVL* nodo) {
@@ -203,8 +231,5 @@ void AVL::destruirRecursivo(NodoAVL* nodo) {
 
 AVL::~AVL(){
     destruirRecursivo(this->raiz);
-}
-
-AVL::~AVL(){
-    
+    raiz = nullptr;
 }

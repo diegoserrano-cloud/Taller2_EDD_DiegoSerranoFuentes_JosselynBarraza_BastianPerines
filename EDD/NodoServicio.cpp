@@ -1,10 +1,10 @@
 #include "NodoServicio.hpp"
 
-NodoServicio::NodoServicio(string nombre) : next(nullptr), primero(nullptr), nombre(nombre) {}
+NodoServicio::NodoServicio(string nombre) : next(nullptr), nombre(nombre) {}
 
 string NodoServicio::getServicio() const{return nombre;}
 NodoServicio* NodoServicio::getNextServicio() const{return next;}
-NodoPaciente* NodoServicio::getPacienteLista() const{return primero;}
+AVL& NodoServicio::getArbolPacientes(){return pacientes;}
+const AVL& NodoServicio::getArbolPacientes() const{return pacientes;}
 
 void NodoServicio::setNextServicio(NodoServicio* nuevo){ this->next = nuevo;}
-void NodoServicio::setPrimerPaciente(NodoPaciente* p) {this->primero = p;}

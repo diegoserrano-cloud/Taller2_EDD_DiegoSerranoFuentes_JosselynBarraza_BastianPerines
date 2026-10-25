@@ -9,29 +9,36 @@ class AVL{
     private:
         NodoAVL* raiz;
 
-        int obtenerAltura(NodoAVL* nodo);
+        int obtenerAltura(const NodoAVL* nodo) const;
         void actualizarAltura(NodoAVL* nodo);
-        int factorBalance(NodoAVL* nodo);
+        int factorBalance(const NodoAVL* nodo) const;
         NodoAVL* rotarDerecha(NodoAVL* y);
         NodoAVL* rotarIzquierda(NodoAVL* x);
         NodoAVL* insertar(NodoAVL* nodo, Paciente paciente);//busca donde colocar el paciente.
-        NodoAVL* buscarPorId(NodoAVL* nodo, string id);
+        NodoAVL* buscarPorId(NodoAVL* nodo, const string& id);
+        const NodoAVL* buscarPorId(const NodoAVL* nodo, const string& id) const;
         void preorden(NodoAVL* nodo);
         void inorden(NodoAVL* nodo);
         void postorden(NodoAVL* nodo);
         void destruirRecursivo(NodoAVL* nodo);
+        int contarNodos(const NodoAVL* nodo) const;
     
     public:
         AVL();
+        AVL(const AVL&) = delete;
+        AVL& operator=(const AVL&) = delete;
+
         void insertarPaciente(Paciente paciente);
-        Paciente* buscarPaciente(string id);
+        Paciente* buscarPaciente(const string& id);
+        const Paciente* buscarPaciente(const string& id) const;
 
         void mostrarPreorden();
         void mostrarInorden();
         void mostrarPostorden();
 
-        int getAlturaRuta();
-        int getFactorBalanceRaiz();
+        int getAlturaRuta() const;
+        int getFactorBalanceRaiz() const;
+        int contarPacientes() const;
 
         ~AVL();
 };

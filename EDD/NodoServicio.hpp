@@ -1,20 +1,20 @@
 #pragma once
 #include <string>
-#include "NodoPaciente.hpp"
+#include "AVL.hpp"
 using namespace std;
 
 class NodoServicio{
     private:
         NodoServicio* next;
-        NodoPaciente* primero;
+        AVL pacientes;
         string nombre;
     public:
         NodoServicio(string nombre);
 
         string getServicio() const;
         NodoServicio* getNextServicio() const;
-        NodoPaciente* getPacienteLista() const;
+        AVL& getArbolPacientes();
+        const AVL& getArbolPacientes() const;
 
         void setNextServicio(NodoServicio* nuevo);
-        void setPrimerPaciente(NodoPaciente* p);
 };
