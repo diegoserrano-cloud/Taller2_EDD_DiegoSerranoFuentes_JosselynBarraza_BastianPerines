@@ -23,6 +23,7 @@ class Hospital {
         int contarPacientes(string nombre);
 
         Paciente* buscarPaciente(string id);
+        bool eliminarPaciente(string id);
 
         int buscarPacientesPorNombre(string nombre);
 

@@ -32,3 +32,6 @@
 3. Ejecutar con `.\menu.exe` desde la terminal integrada de VS Code (Ctrl + Ñ / Ctrl + `).
 4. El programa carga automáticamente `pacientes.txt` (debe estar en la misma carpeta raíz) y muestra el menú principal.
 5. Disfrutar del sistema :D
+
+### Funcionalidades
+- La opción **Buscar paciente** imprime la información del paciente y luego lo elimina de su departamento y rebalancea el árbol AVL correspondiente.

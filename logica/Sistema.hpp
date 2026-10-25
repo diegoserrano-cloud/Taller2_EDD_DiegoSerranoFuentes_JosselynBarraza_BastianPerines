@@ -19,6 +19,7 @@ class Sistema{
          void verDepartamento();
          void atenderPaciente(int cantidad);
          void buscaPaciente();
+         void eliminarPacientePorId();
          
         ~Sistema();
 };

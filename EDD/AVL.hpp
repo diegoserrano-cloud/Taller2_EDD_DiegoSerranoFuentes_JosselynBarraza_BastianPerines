@@ -15,6 +15,8 @@ class AVL{
         NodoAVL* rotarDerecha(NodoAVL* y);
         NodoAVL* rotarIzquierda(NodoAVL* x);
         NodoAVL* insertar(NodoAVL* nodo, Paciente paciente);//busca donde colocar el paciente.
+        NodoAVL* eliminar(NodoAVL* nodo, const string& id, bool& eliminado);
+        NodoAVL* nodoMinimo(NodoAVL* nodo) const;
         NodoAVL* buscarPorId(NodoAVL* nodo, const string& id);
         const NodoAVL* buscarPorId(const NodoAVL* nodo, const string& id) const;
         void preorden(NodoAVL* nodo);
@@ -30,6 +32,7 @@ class AVL{
         AVL& operator=(const AVL&) = delete;
 
         void insertarPaciente(Paciente paciente);
+        bool eliminarPaciente(const string& id);
         Paciente* buscarPaciente(const string& id);
         const Paciente* buscarPaciente(const string& id) const;
 

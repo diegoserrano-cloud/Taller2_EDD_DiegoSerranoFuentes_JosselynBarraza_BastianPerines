@@ -108,8 +108,70 @@ NodoAVL* AVL::insertar(NodoAVL* nodo, Paciente paciente){ //busca donde colocar 
     return nodo;
 }
 
+NodoAVL* AVL::nodoMinimo(NodoAVL* nodo) const{
+    NodoAVL* actual = nodo;
+    while(actual != nullptr && actual->getIzquierdo() != nullptr){
+        actual = actual->getIzquierdo();
+    }
+    return actual;
+}
+
+NodoAVL* AVL::eliminar(NodoAVL* nodo, const string& id, bool& eliminado){
+    if(nodo == nullptr){
+        return nullptr;
+    }
+
+    if(id < nodo->getPaciente().getId()){
+        nodo->setIzquierdo(eliminar(nodo->getIzquierdo(), id, eliminado));
+    }else if(id > nodo->getPaciente().getId()){
+        nodo->setDerecho(eliminar(nodo->getDerecho(), id, eliminado));
+    }else{
+        eliminado = true;
+        if(nodo->getIzquierdo() == nullptr || nodo->getDerecho() == nullptr){
+            NodoAVL* hijo;
+            if (nodo->getIzquierdo() != nullptr) {
+                hijo = nodo->getIzquierdo();
+            } else {
+                hijo = nodo->getDerecho();   
+            }
+            delete nodo;
+            return hijo;
+        }
+
+        NodoAVL* sucesor = nodoMinimo(nodo->getDerecho());
+        nodo->getPaciente() = sucesor->getPaciente();
+        nodo->setDerecho(eliminar(nodo->getDerecho(), sucesor->getPaciente().getId(), eliminado));
+    }
+
+    actualizarAltura(nodo);
+    int balance = factorBalance(nodo);
+
+    if(balance > 1 && factorBalance(nodo->getIzquierdo()) >= 0){
+        return rotarDerecha(nodo);
+    }
+    if(balance > 1 && factorBalance(nodo->getIzquierdo()) < 0){
+        nodo->setIzquierdo(rotarIzquierda(nodo->getIzquierdo()));
+        return rotarDerecha(nodo);
+    }
+    if(balance < -1 && factorBalance(nodo->getDerecho()) <= 0){
+        return rotarIzquierda(nodo);
+    }
+    if(balance < -1 && factorBalance(nodo->getDerecho()) > 0){
+        nodo->setDerecho(rotarDerecha(nodo->getDerecho()));
+        return rotarIzquierda(nodo);
+    }
+
+    return nodo;
+}
+
 void AVL::insertarPaciente(Paciente paciente){
     this->raiz = insertar(raiz, paciente);
+}
+
+bool AVL::eliminarPaciente(const string& id){
+    bool eliminado = false;
+    raiz = eliminar(raiz, id, eliminado);
+    return eliminado;
 }
 
 NodoAVL* AVL::buscarPorId(NodoAVL* nodo, const string& id) {

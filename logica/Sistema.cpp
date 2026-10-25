@@ -164,97 +164,37 @@ void Sistema::verDepartamento(){
     cout<<" "<< endl;
     cout << "=== DEPARTAMENTOS/SERVICIOS ===" << endl;
     cout<<" "<< endl;
-    
-    cout<<"1. Urgencias \n"<<
-          "2. Medicina General \n"<<
-          "3. Cardiología \n"<<
-          "4. Neurología \n"<<
-          "5. Traumatología \n"<<
-          "6. Cirugía \n"<<
-          "7. Pediatria \n"<<
-          "8. Hospitalizacion "<<endl;
-    cout<<" "<< endl;
-    int op;
-    cin>>op;
-    if(op >= 1 && op <= 8){
+    const string servicios[] = {
+        "Urgencias", "Medicina General", "Cardiologia", "Neurologia",
+        "Traumatologia", "Cirugia", "Pediatria", "Hospitalizacion"
+    };
+    const int cantidadServicios = sizeof(servicios) / sizeof(servicios[0]);
 
+    for(int i = 0; i < cantidadServicios; i++){
+        cout << i + 1 << ". " << servicios[i] << endl;
+    }
 
-        if(op == 1){
-            cout<<"==== ESTADO URGENCIA ==="<<endl;
-            if(hospital->contarPacientes("Urgencias") == 0){
-                cout<<"No hay pacientes en el departamento de Urgencias"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Urgencias: "<<hospital->contarPacientes("Urgencias")<<endl;
-            hospital->mostrarServicio("Urgencias");
-
-        }else if(op == 2){
-            cout<<"==== ESTADO MEDICINA GENERAL ==="<<endl;
-            if(hospital->contarPacientes("Medicina General") == 0){
-                cout<<"No hay pacientes en el departamento de Medicina General"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Medicina General: "<<hospital->contarPacientes("Medicina General")<<endl;
-            hospital->mostrarServicio("Medicina General");
-
-        }else if(op == 3){
-            cout<<"==== ESTADO CARDIOLOGIA ==="<<endl;
-            if(hospital->contarPacientes("Cardiologia") == 0){
-                cout<<"No hay pacientes en el departamento de Cardiologia"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Cardiologia: "<<hospital->contarPacientes("Cardiologia")<<endl;
-            hospital->mostrarServicio("Cardiologia");
-
-        }else if(op == 4){
-            cout<<"==== ESTADO NEUROLOGIA ==="<<endl;
-            if(hospital->contarPacientes("Neurologia") == 0){
-                cout<<"No hay pacientes en el departamento de Neurologia"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Neurologia: "<<hospital->contarPacientes("Neurologia")<<endl;
-            hospital->mostrarServicio("Neurologia");
-
-        }else if(op == 5){
-            cout<<"==== ESTADO TRAUMATOLOGIA ==="<<endl;
-            if(hospital->contarPacientes("Traumatologia") == 0){
-                cout<<"No hay pacientes en el departamento de Traumatologia"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Traumatologia: "<<hospital->contarPacientes("Traumatologia")<<endl;
-            hospital->mostrarServicio("Traumatologia");
-
-        }else if(op == 6){
-            cout<<"==== ESTADO CIRUGIA ==="<<endl;
-            if(hospital->contarPacientes("Cirugia") == 0){
-                cout<<"No hay pacientes en el departamento de Cirugia"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Cirugia: "<<hospital->contarPacientes("Cirugia")<<endl;
-            hospital->mostrarServicio("Cirugia");
-
-        }else if(op == 7){
-            cout<<"==== ESTADO PEDIATRIA ==="<<endl;
-            if(hospital->contarPacientes("Pediatria") == 0){
-                cout<<"No hay pacientes en el departamento de Pediatria"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Pediatria: "<<hospital->contarPacientes("Pediatria")<<endl;
-            hospital->mostrarServicio("Pediatria");
-
-        }else if(op == 8){
-            cout<<"==== ESTADO HOSPITALIZACION ==="<<endl;
-            if(hospital->contarPacientes("Hospitalizacion") == 0){
-                cout<<"No hay pacientes en el departamento de Hospitalizacion"<<endl;
-                return;
-            }
-            cout<<"Pacientes en el departamente de Hospitalizacion: "<<hospital->contarPacientes("Hospitalizacion")<<endl;
-            hospital->mostrarServicio("Hospitalizacion");
-        }cout<<" "<<endl;
-    }else{
-        cout<<"Fuera del rango, SALIENDO.."<<endl;
+    int opcion;
+    cout << "Seleccione un departamento: ";
+    if(!(cin >> opcion) || opcion < 1 || opcion > cantidadServicios){
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Opcion fuera de rango." << endl;
         return;
     }
+
+    const string& servicio = servicios[opcion - 1];
+    int cantidadPacientes = hospital->contarPacientes(servicio);
+    cout << "==== ESTADO " << servicio << " ====" << endl;
+    if(cantidadPacientes == 0){
+        cout << "No hay pacientes en el departamento de " << servicio << endl;
+        return;
+    }
+
+    cout << "Pacientes en el departamento de " << servicio << ": "
+         << cantidadPacientes << endl;
+    hospital->mostrarServicio(servicio);
+    cout << endl;
 }
 
 void Sistema::revisarHistorial(){
@@ -333,10 +273,24 @@ void Sistema::buscaPaciente(){
     }
 }
 
+void Sistema::eliminarPacientePorId(){
+    string id;
+    cout << "Ingrese el ID del paciente que desea buscar: ";
+    cin >> id;
+    Paciente* paciente = hospital->buscarPaciente(id);
+    if(paciente != nullptr){
+
+        cout << paciente->mostrarInfo() << endl;
+        bool eliminado = hospital->eliminarPaciente(id);
+
+    }else{
+        cout << "No se encontro un paciente con ID: " << id << endl;
+    }
+}
+
 Sistema::~Sistema(){
     delete pendientes;
     delete atendidos;
     delete hospital;
     delete arbolDecision;
 }
-
