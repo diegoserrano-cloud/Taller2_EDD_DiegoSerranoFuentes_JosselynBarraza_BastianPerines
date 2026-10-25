@@ -52,7 +52,7 @@ int main() {
                 sis->verDepartamento();  
                 break;
             case 3:
-                sis->eliminarPacientePorId();
+                sis->buscaPaciente();
                 break;
             case 4:
                 cout<<"Saliendo....."<<endl;

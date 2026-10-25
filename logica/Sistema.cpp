@@ -242,19 +242,7 @@ void Sistema::buscaPaciente(){
     cin >> opcion;
 
     if(opcion == 1){
-        string id;
-
-        cout << "Ingrese el ID del paciente: ";
-        cin >> id;
-
-        Paciente* encontrado = hospital->buscarPaciente(id);
-
-        if(encontrado != nullptr){
-            cout << "=== PACIENTE ENCONTRADO ===" << endl;
-            encontrado->mostrarInfo();
-        }else{
-            cout << "No se encontro un paciente con ID: " << id << endl;
-        }
+        eliminarPacientePorId();
     }
     else if(opcion == 2){
         string nombre;
