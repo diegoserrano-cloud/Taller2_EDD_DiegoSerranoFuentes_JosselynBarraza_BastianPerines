@@ -16,7 +16,7 @@ int main() {
    
     
     do{
-    cout<<"Hola taller 2 "<<endl;
+    
       cout<<"=== HOSPITAL MARMAJA =="<<endl;
       cout<<"1. Atender pacientes"<<endl;
       cout<<"2. Ver departamento"<<endl;

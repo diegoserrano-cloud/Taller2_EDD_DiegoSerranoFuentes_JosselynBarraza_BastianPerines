@@ -159,7 +159,51 @@ void AVL::postorden(NodoAVL* nodo) {
          << " | Edad: " << nodo->getPaciente().getEdad() << endl;
 }
 
+void AVL::mostrarPreorden() {
+    if (this->raiz == nullptr) {
+        cout << "Sin pacientes registrados en este servicio." << endl;
+        return;
+    }
 
+    preoorden(this->raiz);
+}
+
+void AVL::mostrarInorden() {
+    if (this->raiz == nullptr) {
+        cout << "Sin pacientes registrados en este servicio." << endl;
+        return;
+    }
+
+    inorden(this->raiz);
+}
+
+void AVL::mostrarPostorden() {
+    if (this->raiz == nullptr) {
+        cout << "Sin pacientes registrados en este servicio." << endl;
+        return;
+    }
+
+    postorden(this->raiz);
+}
+
+int AVL::getAltura() {
+    return obtenerAltura(this->raiz);
+}
+
+int AVL::getFactorBalanceRaiz() {
+    return factorBalance(this->raiz);
+}
+
+void AVL::destruirRecursivo(NodoAVL* nodo) {
+    if (nodo == nullptr) return;
+    destruirRecursivo(nodo->getIzquierdo());
+    destruirRecursivo(nodo->getDerecho());
+    delete nodo;
+}
+
+AVL::~AVL(){
+    destruirRecursivo(this->raiz);
+}
 
 AVL::~AVL(){
     
