@@ -1,4 +1,4 @@
-# Taller 1 - Estructura de Datos: Sistema de Gestión de Pacientes "Hospital Marmaja"
+# Taller 2 - Estructura de Datos: Sistema de Gestión de Pacientes "Hospital Marmaja" con sistema AVL
 
 ## Integrantes
 
